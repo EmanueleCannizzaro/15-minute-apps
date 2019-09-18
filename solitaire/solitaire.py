@@ -1,9 +1,11 @@
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
 
 import os
 import random
+
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPointF, QRect, QRectF, QRunnable, QSize,  Qt, QThreadPool, QTimer, Signal, Slot)
+from PySide2.QtGui import (QBrush, QColor, QFont, QIcon, QImage, QPainter, QPalette, QPen, QPixmap)
+from PySide2.QtWidgets import (QAction, QActionGroup, QApplication, QButtonGroup, QComboBox, QFontComboBox, QFormLayout, QGraphicsItem, QGraphicsPixmapItem, QGraphicsRectItem, QGraphicsScene, QGraphicsView, QGridLayout, QHBoxLayout, QLabel, QLayout, QLineEdit, QMainWindow, QMenu, QMenuBar, QMessageBox, QPushButton, QSizePolicy, QSlider, QSpacerItem, QStatusBar, QToolBar, QVBoxLayout, QWidget)
+
 
 WINDOW_SIZE = 840, 600
 
@@ -29,9 +31,9 @@ SUITS = ["C", "S", "H", "D"]
 
 
 class Signals(QObject):
-    complete = pyqtSignal()
-    clicked = pyqtSignal()
-    doubleclicked = pyqtSignal()
+    complete = Signal()
+    clicked = Signal()
+    doubleclicked = Signal()
 
 
 class Card(QGraphicsPixmapItem):

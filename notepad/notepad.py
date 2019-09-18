@@ -1,10 +1,11 @@
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtPrintSupport import *
 
 import os
 import sys
+
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QRunnable, QSize,  Qt, QThreadPool, Signal, Slot)
+from PySide2.QtGui import (QFont, QFontDatabase, QIcon, QPixmap)
+from PySide2.QtWidgets import (QAction, QApplication, QComboBox, QFormLayout, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QMainWindow, QMessageBox, QPlainTextEdit, QPushButton, QSizePolicy, QStatusBar, QToolBar, QVBoxLayout, QWidget)
+from PySide2.QtPrintSupport import *
 
 
 class MainWindow(QMainWindow):

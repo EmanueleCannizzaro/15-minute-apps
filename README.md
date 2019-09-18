@@ -1,4 +1,4 @@
-# 15 Minute Apps
+# PySide2 Applications built in 15 Minutes
 
 
 Forked from https://github.com/mfitzp/15-minute-apps and ported to PySide2.

@@ -1,8 +1,7 @@
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
 
-from MainWindow import Ui_MainWindow
+import json
+from urllib import parse
+import requests
 
 try:
     from googletrans import Translator
@@ -11,9 +10,10 @@ try:
 except ImportError:
     GOOGLE_TRANSLATE_AVAILABLE = False
 
-import json
-from urllib import parse
-import requests
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QRect, QSize)
+from PySide2.QtGui import (QFont, QIcon, QPixmap)
+from PySide2.QtWidgets import (QAction, QApplication, QComboBox, QGridLayout, QHBoxLayout, QLCDNumber, QMenu, QMenuBar, QSizePolicy, QTextEdit, QMainWindow, QPushButton, QStatusBar, QVBoxLayout, QWidget)
+
 
 LANGUAGES = {
     '<Detect language>': None,
@@ -84,7 +84,7 @@ LANGUAGES = {
 }
 
 
-class MainWindow(QMainWindow, Ui_MainWindow):
+class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
@@ -95,7 +95,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.destTextEdit.setReadOnly(True)
 
         if GOOGLE_TRANSLATE_AVAILABLE:
-            self.srcLanguage.addItems(LANGUAGES.keys())
+            self.srcLanguage.addItems(tuple(LANGUAGES.keys()))
             self.srcLanguage.currentTextChanged[str].connect(self.update_src_language)
             self.srcLanguage.setCurrentText('English')
         else:
@@ -104,6 +104,55 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.translateButton.pressed.connect(self.translate)
 
         self.show()
+
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(721, 333)
+        self.centralwidget = QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.horizontalLayout = QHBoxLayout(self.centralwidget)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.srcLanguage = QComboBox(self.centralwidget)
+        self.srcLanguage.setObjectName("srcLanguage")
+        self.verticalLayout.addWidget(self.srcLanguage)
+        self.srcTextEdit = QTextEdit(self.centralwidget)
+        self.srcTextEdit.setObjectName("srcTextEdit")
+        self.verticalLayout.addWidget(self.srcTextEdit)
+        self.horizontalLayout.addLayout(self.verticalLayout)
+        self.verticalLayout_3 = QVBoxLayout()
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.translateButton = QPushButton(self.centralwidget)
+        self.translateButton.setMinimumSize(QSize(75, 50))
+        self.translateButton.setMaximumSize(QSize(75, 50))
+        self.translateButton.setText("")
+        icon = QIcon()
+        icon.addPixmap(QPixmap("images/flag.png"), QIcon.Normal, QIcon.Off)
+        self.translateButton.setIcon(icon)
+        self.translateButton.setIconSize(QSize(75, 50))
+        self.translateButton.setObjectName("translateButton")
+        self.verticalLayout_3.addWidget(self.translateButton)
+        self.horizontalLayout.addLayout(self.verticalLayout_3)
+        self.verticalLayout_2 = QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.destTextEdit = QTextEdit(self.centralwidget)
+        self.destTextEdit.setObjectName("destTextEdit")
+        self.verticalLayout_2.addWidget(self.destTextEdit)
+        self.horizontalLayout.addLayout(self.verticalLayout_2)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QMenuBar(MainWindow)
+        self.menubar.setGeometry(QRect(0, 0, 721, 22))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+
+        self.retranslateUi(MainWindow)
+        QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Translataarrr"))
+        self.translateButton.setToolTip(_translate("MainWindow", "Translate"))
 
     def update_src_language(self, l):
         self.language_src = LANGUAGES[l]

@@ -1,9 +1,11 @@
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
 
 import random
 import time
+
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QRunnable, QSize,  Qt, QThreadPool, QTimer, Signal, Slot)
+from PySide2.QtGui import (QBrush, QColor, QFont, QIcon, QImage, QPainter, QPalette, QPen, QPixmap)
+from PySide2.QtWidgets import (QAction, QApplication, QComboBox, QFormLayout, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton, QSizePolicy, QStatusBar, QToolBar, QVBoxLayout, QWidget)
+
 
 IMG_BOMB = QImage("./images/bug.png")
 IMG_FLAG = QImage("./images/flag.png")
@@ -41,9 +43,9 @@ STATUS_ICONS = {
 
 
 class Pos(QWidget):
-    expandable = pyqtSignal(int, int)
-    clicked = pyqtSignal()
-    ohno = pyqtSignal()
+    expandable = Signal(int, int)
+    clicked = Signal()
+    ohno = Signal()
 
     def __init__(self, x, y, *args, **kwargs):
         super(Pos, self).__init__(*args, **kwargs)

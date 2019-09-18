@@ -1,18 +1,20 @@
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+
+import sys
+import time
+import traceback
 
 import pyqtgraph as pg
 import requests
 import requests_cache
 
-
 from collections import defaultdict
 from datetime import datetime, timedelta, date
 from itertools import cycle
-import sys
-import time
-import traceback
+
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QRunnable, QSize,  Qt, QThreadPool, Signal, Slot)
+from PySide2.QtGui import (QFont, QIcon, QPixmap, QStandardItemModel)
+from PySide2.QtWidgets import (QAction, QApplication, QComboBox, QFormLayout, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QMainWindow, QMessageBox, QProgressBar, QPushButton, QSizePolicy, QStatusBar, QTableView, QToolBar, QVBoxLayout, QWidget)
+
 
 requests_cache.install_cache('http_cache')
 
@@ -54,11 +56,11 @@ class WorkerSignals(QObject):
     '''
     Defines the signals available from a running worker thread.
     '''
-    finished = pyqtSignal()
-    error = pyqtSignal(tuple)
-    progress = pyqtSignal(int)
-    data = pyqtSignal(int, dict)
-    cancel = pyqtSignal()
+    finished = Signal()
+    error = Signal(tuple)
+    progress = Signal(int)
+    data = Signal(int, dict)
+    cancel = Signal()
 
 
 class UpdateWorker(QRunnable):
@@ -73,7 +75,7 @@ class UpdateWorker(QRunnable):
         self.base_currency = base_currency
         self.signals.cancel.connect(self.cancel)
 
-    @pyqtSlot()
+    @Slot()
     def run(self):
         try:
             today = date.today()

@@ -1,18 +1,20 @@
+
 from datetime import datetime, timedelta, date
 from itertools import cycle
 import os
 import sys
 import traceback
 
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-
 import numpy as np
 
 import pyqtgraph as pg
 import requests
 import requests_cache
+
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QRunnable, QSize, Qt, QThreadPool, Signal, Slot)
+from PySide2.QtGui import (QFont, QIcon, QPixmap, QStandardItemModel)
+from PySide2.QtWidgets import (QAction, QApplication, QComboBox, QFormLayout, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QMainWindow, QMessageBox, QProgressBar, QPushButton, QSizePolicy, QStatusBar, QTableView, QToolBar, QVBoxLayout, QWidget)
+
 
 # CryptoCompare.com API Key
 CRYPTOCOMPARE_API_KEY = ''
@@ -44,11 +46,11 @@ class WorkerSignals(QObject):
     """
     Defines the signals available from a running worker thread.
     """
-    finished = pyqtSignal()
-    error = pyqtSignal(tuple)
-    progress = pyqtSignal(int)
-    data = pyqtSignal(dict, list)
-    cancel = pyqtSignal()
+    finished = Signal()
+    error = Signal(tuple)
+    progress = Signal(int)
+    data = Signal(dict, list)
+    cancel = Signal()
 
 
 class UpdateWorker(QRunnable):
@@ -63,7 +65,7 @@ class UpdateWorker(QRunnable):
         self.base_currency = base_currency
         self.signals.cancel.connect(self.cancel)
 
-    @pyqtSlot()
+    @Slot()
     def run(self):
         auth_header = {
             'Apikey': CRYPTOCOMPARE_API_KEY

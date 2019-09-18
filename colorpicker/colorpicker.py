@@ -1,7 +1,9 @@
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
 
 import os
+
+from PySide2.QtGui import (QFont, QIcon, QPixmap)
+from PySide2.QtWidgets import (QAction, QApplication, QComboBox, QColorDialog, QFormLayout, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QMainWindow, QMenu, QMessageBox, QPushButton, QSizePolicy, QStatusBar, QSystemTrayIcon, QToolBar, QVBoxLayout, QWidget)
+
 
 app = QApplication([])
 app.setQuitOnLastWindowClosed(False)

@@ -1,13 +1,14 @@
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtPrintSupport import *
-from PyQt5.QtMultimedia import *
-from PyQt5.QtMultimediaWidgets import *
 
 import os
 import sys
 import time
+
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QRunnable, QSize,  Qt, QThreadPool, Signal, Slot)
+from PySide2.QtGui import (QFont, QIcon, QPixmap)
+from PySide2.QtWidgets import (QAction, QApplication, QComboBox, QFormLayout, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton, QSizePolicy, QStatusBar, QToolBar, QVBoxLayout, QWidget)
+#from PySide2.QtPrintSupport import *
+from PySide2.QtMultimedia import (QCamera, QCameraInfo, QCameraImageCapture)
+from PySide2.QtMultimediaWidgets import (QCameraViewfinder)
 
 
 class MainWindow(QMainWindow):
