@@ -1,5 +1,8 @@
 # 15 Minute Apps
 
+
+Forked from https://github.com/mfitzp/15-minute-apps and ported to PySide2.
+
 A collection of 15 small — *minute* — desktop applications written in Python
 using the PyQt framework. These apps are intended as examples from
 which you can poke, hack and prod your way to writing your own tools.
